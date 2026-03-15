@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FiTag, FiLoader } from 'react-icons/fi';
 import { categoryAPI } from '../services/api';
-import { CategoryResult } from '../components/ui/CategoryResult';
+import { CategoryResult } from '../components/UI/CategoryResult';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 
 export const Category = () => {
