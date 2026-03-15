@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FiBriefcase, FiDollarSign, FiTarget, FiLoader } from 'react-icons/fi';
 import { proposalAPI } from '../services/api';
-import { ProposalResult } from '../components/UI/ProposalResult';
+import { ProposalResult } from '../components/ui/ProposalResult';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 
 export const Proposal = () => {
