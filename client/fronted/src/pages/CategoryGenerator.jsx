@@ -72,7 +72,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FiLoader } from 'react-icons/fi';
 import { categoryAPI } from '../services/api';
-import CategoryResult from '../components/ui/CategoryResult';
+import CategoryResult from '../components/UI/CategoryResult.jsx';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 
 export const Category = () => {
