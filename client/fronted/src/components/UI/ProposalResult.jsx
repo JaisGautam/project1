@@ -1,5 +1,106 @@
 
 
+// import React from 'react';
+// import { FiCheckCircle, FiPackage, FiGlobe, FiDroplet, FiMapPin } from 'react-icons/fi';
+
+// export const ProposalResult = ({ result }) => {
+//   if (!result) return null;
+
+//   const ImpactCard = ({ icon: Icon, label, value, unit, color }) => (
+//     <div className="bg-gray-50 p-4 rounded-lg text-center">
+//       <Icon className={`text-2xl ${color} mx-auto mb-2`} />
+//       <p className="text-xs text-gray-500 mb-1">{label}</p>
+//       <p className="text-lg font-bold text-gray-800">
+//         {value} <span className="text-xs font-normal text-gray-500">{unit}</span>
+//       </p>
+//     </div>
+//   );
+
+//   return (
+//     <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+//       {/* Header */}
+//       <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4">
+//         <div className="flex items-center space-x-2">
+//           <FiCheckCircle className="text-white text-xl" />
+//           <h3 className="text-lg font-semibold text-white">Proposal Generated</h3>
+//         </div>
+//         <p className="text-blue-100 text-sm mt-1">ID: {result.proposalId}</p>
+//       </div>
+
+//       {/* Content */}
+//       <div className="p-6 space-y-6">
+//         {/* Budget Summary */}
+//         <div className="grid grid-cols-3 gap-3">
+//           <div className="bg-gray-50 p-3 rounded-lg text-center">
+//             <p className="text-xs text-gray-500 mb-1">Budget</p>
+//             <p className="text-lg font-bold text-gray-800">₹{result.budget?.toLocaleString()}</p>
+//           </div>
+//           <div className="bg-green-50 p-3 rounded-lg text-center">
+//             <p className="text-xs text-green-600 mb-1">Total Cost</p>
+//             <p className="text-lg font-bold text-green-600">₹{result.totalCost?.toLocaleString()}</p>
+//           </div>
+//           <div className="bg-blue-50 p-3 rounded-lg text-center">
+//             <p className="text-xs text-blue-600 mb-1">Remaining</p>
+//             <p className="text-lg font-bold text-blue-600">₹{result.budgetRemaining?.toLocaleString()}</p>
+//           </div>
+//         </div>
+
+//         {/* Product Mix */}
+//         {result.productMix?.length > 0 && (
+//           <div>
+//             <div className="flex items-center space-x-2 mb-3">
+//               <FiPackage className="text-gray-400" />
+//               <p className="text-sm font-medium text-gray-700">Product Mix</p>
+//             </div>
+//             <div className="space-y-2">
+//               {result.productMix.map((item, idx) => (
+//                 <div key={idx} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+//                   <div>
+//                     <p className="font-medium text-gray-800">{item.name}</p>
+//                     <p className="text-xs text-gray-500">{item.quantity} units × ₹{item.unitPrice}</p>
+//                   </div>
+//                   <p className="font-semibold text-gray-800">₹{item.total}</p>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* Impact Summary */}
+//         {result.impactSummary && (
+//           <div>
+//             <p className="text-sm font-medium text-gray-700 mb-3">Environmental Impact</p>
+//             <div className="grid grid-cols-3 gap-3">
+//               <ImpactCard
+//                 icon={FiDroplet}
+//                 label="Plastic Saved"
+//                 value={result.impactSummary.plasticSavedKg}
+//                 unit="kg"
+//                 color="text-blue-500"
+//               />
+//               <ImpactCard
+//                 icon={FiGlobe}
+//                 label="CO₂ Avoided"
+//                 value={result.impactSummary.carbonAvoidedKg}
+//                 unit="kg"
+//                 color="text-green-500"
+//               />
+//               <ImpactCard
+//                 icon={FiMapPin}
+//                 label="Local Sourcing"
+//                 value={result.impactSummary.localSourcingPercent}
+//                 unit="%"
+//                 color="text-purple-500"
+//               />
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+
 import React from 'react';
 import { FiCheckCircle, FiPackage, FiGlobe, FiDroplet, FiMapPin } from 'react-icons/fi';
 
@@ -11,7 +112,7 @@ export const ProposalResult = ({ result }) => {
       <Icon className={`text-2xl ${color} mx-auto mb-2`} />
       <p className="text-xs text-gray-500 mb-1">{label}</p>
       <p className="text-lg font-bold text-gray-800">
-        {value} <span className="text-xs font-normal text-gray-500">{unit}</span>
+        {value !== undefined && value !== null ? value : 'N/A'} <span className="text-xs font-normal text-gray-500">{unit}</span>
       </p>
     </div>
   );
@@ -24,7 +125,9 @@ export const ProposalResult = ({ result }) => {
           <FiCheckCircle className="text-white text-xl" />
           <h3 className="text-lg font-semibold text-white">Proposal Generated</h3>
         </div>
-        <p className="text-blue-100 text-sm mt-1">ID: {result.proposalId}</p>
+        {result.proposalId && (
+          <p className="text-blue-100 text-sm mt-1">ID: {result.proposalId}</p>
+        )}
       </div>
 
       {/* Content */}
@@ -33,20 +136,26 @@ export const ProposalResult = ({ result }) => {
         <div className="grid grid-cols-3 gap-3">
           <div className="bg-gray-50 p-3 rounded-lg text-center">
             <p className="text-xs text-gray-500 mb-1">Budget</p>
-            <p className="text-lg font-bold text-gray-800">₹{result.budget?.toLocaleString()}</p>
+            <p className="text-lg font-bold text-gray-800">
+              ₹{result.budget ? result.budget.toLocaleString() : 'N/A'}
+            </p>
           </div>
           <div className="bg-green-50 p-3 rounded-lg text-center">
             <p className="text-xs text-green-600 mb-1">Total Cost</p>
-            <p className="text-lg font-bold text-green-600">₹{result.totalCost?.toLocaleString()}</p>
+            <p className="text-lg font-bold text-green-600">
+              ₹{result.totalCost ? result.totalCost.toLocaleString() : 'N/A'}
+            </p>
           </div>
           <div className="bg-blue-50 p-3 rounded-lg text-center">
             <p className="text-xs text-blue-600 mb-1">Remaining</p>
-            <p className="text-lg font-bold text-blue-600">₹{result.budgetRemaining?.toLocaleString()}</p>
+            <p className="text-lg font-bold text-blue-600">
+              ₹{result.budgetRemaining ? result.budgetRemaining.toLocaleString() : 'N/A'}
+            </p>
           </div>
         </div>
 
         {/* Product Mix */}
-        {result.productMix?.length > 0 && (
+        {result.productMix && result.productMix.length > 0 && (
           <div>
             <div className="flex items-center space-x-2 mb-3">
               <FiPackage className="text-gray-400" />
@@ -56,10 +165,12 @@ export const ProposalResult = ({ result }) => {
               {result.productMix.map((item, idx) => (
                 <div key={idx} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-800">{item.name}</p>
-                    <p className="text-xs text-gray-500">{item.quantity} units × ₹{item.unitPrice}</p>
+                    <p className="font-medium text-gray-800">{item.name || 'Product'}</p>
+                    <p className="text-xs text-gray-500">
+                      {item.quantity || 0} units × ₹{item.unitPrice || 0}
+                    </p>
                   </div>
-                  <p className="font-semibold text-gray-800">₹{item.total}</p>
+                  <p className="font-semibold text-gray-800">₹{item.total || 0}</p>
                 </div>
               ))}
             </div>
@@ -74,28 +185,41 @@ export const ProposalResult = ({ result }) => {
               <ImpactCard
                 icon={FiDroplet}
                 label="Plastic Saved"
-                value={result.impactSummary.plasticSavedKg}
+                value={result.impactSummary.plasticSavedKg || result.impactSummary.plastic_saved_kg || 0}
                 unit="kg"
                 color="text-blue-500"
               />
               <ImpactCard
                 icon={FiGlobe}
                 label="CO₂ Avoided"
-                value={result.impactSummary.carbonAvoidedKg}
+                value={result.impactSummary.carbonAvoidedKg || result.impactSummary.carbon_avoided_kg || 0}
                 unit="kg"
                 color="text-green-500"
               />
               <ImpactCard
                 icon={FiMapPin}
                 label="Local Sourcing"
-                value={result.impactSummary.localSourcingPercent}
+                value={result.impactSummary.localSourcingPercent || result.impactSummary.local_sourcing_percent || 0}
                 unit="%"
                 color="text-purple-500"
               />
             </div>
           </div>
         )}
+
+        {/* Fallback: If no structured data, show raw response */}
+        {!result.productMix && !result.impactSummary && (
+          <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+            <h4 className="font-semibold mb-2 text-gray-700">AI Response:</h4>
+            <pre className="text-xs overflow-auto bg-gray-100 p-3 rounded">
+              {JSON.stringify(result, null, 2)}
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+// Also add default export for flexibility
+export default ProposalResult;

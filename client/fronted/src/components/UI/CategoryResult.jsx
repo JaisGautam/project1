@@ -104,3 +104,4 @@ export const CategoryResult = ({ result }) => {
     </div>
   );
 };
+export default CategoryResult;
