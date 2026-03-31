@@ -1,11 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "AI Sustainability Platform Backend",
   "scripts": {
     "build": "nest build",
-    "start": "ts-node src/main.ts",
-    "dev": "nodemon --exec ts-node src/main.ts"
+    "start": "node dist/main.js",
+    "start:dev": "ts-node src/main.ts",
+    "dev": "nodemon --exec ts-node src/main.ts",
+    "start:prod": "node dist/main.js"
   },
   "keywords": [],
   "author": "",
