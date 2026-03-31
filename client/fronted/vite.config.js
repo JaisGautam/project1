@@ -16,7 +16,11 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss()
+    tailwindcss(),
+    
   ],
+   build: {
+    outDir: 'dist',
+  },
   base: '/',  // ← Vercel deploy ke liye required
 })
