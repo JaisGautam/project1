@@ -25,12 +25,6 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-// Add this check for demo mode
-if (API_BASE_URL === 'https://api.example.com' || 
-    API_BASE_URL === 'https://placeholder-backend.com' ||
-    API_BASE_URL === 'http://localhost:5000') {
-  console.warn('⚠️ Backend URL not configured yet. Using demo mode.');
-}
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -39,7 +33,7 @@ const api = axios.create({
   },
 });
 
-// Optional: Add response interceptor for better error handling
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
